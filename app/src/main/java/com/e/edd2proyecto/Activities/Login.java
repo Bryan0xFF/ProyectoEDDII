@@ -12,11 +12,20 @@ import com.e.edd2proyecto.R;
 public class Login extends AppCompatActivity {
 
     Button btnSignUp, btnLogin;
-    EditText etUser
+    EditText etUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent chat = new Intent(Login.this, ChatActivity.class);
+                startActivity(chat);
+            }
+        });
 
         btnSignUp = findViewById(R.id.btnRegister);
 
