@@ -16,15 +16,16 @@ import java.util.List;
 public class ChatAdapter extends BaseAdapter {
 
     private List<MensajeEnviado> list_mensajeEnviado;
+    private List<MensajeRecibido> list_mensajeRecibido;
     private Context context;
+    private LayoutInflater layoutInflater;
+    int count = 0;
 
-    public ChatAdapter(List<MensajeEnviado> list_mensajeEnviado, Context context) {
-        this.list_mensajeEnviado = list_mensajeEnviado;
+    public ChatAdapter(List<MensajeEnviado> list_mensaje, Context context) {
+        this.list_mensajeEnviado = list_mensaje;
         this.context = context;
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
-    private LayoutInflater layoutInflater;
 
     @Override
     public int getCount() {
@@ -45,15 +46,16 @@ public class ChatAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
        View view = convertView;
        if(view == null) {
-           if(list_mensajeEnviado.get(position).esEnviado) {
+           if(list_mensajeEnviado.get(position).isEsEnviado()) {
                view = layoutInflater.inflate(R.layout.list_item_mensaje_enviar,null);
            }
            else {
                view = layoutInflater.inflate(R.layout.list_item_mensaje_recibir,null);
            }
            BubbleTextView mensaje = (BubbleTextView)view.findViewById(R.id.mensaje_texto);
-           mensaje.setText(list_mensajeEnviado.get(position).mensaje);
+           mensaje.setText(list_mensajeEnviado.get(position).getMensaje());
        }
+
        return view;
     }
 }

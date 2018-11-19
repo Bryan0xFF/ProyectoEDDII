@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.e.edd2proyecto.Adapter.ChatAdapter;
 import com.e.edd2proyecto.ChatModels.MensajeEnviado;
+import com.e.edd2proyecto.ChatModels.MensajeRecibido;
 import com.e.edd2proyecto.R;
 
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ public class ChatActivity extends AppCompatActivity {
     ListView listView;
     EditText editText;
     List<MensajeEnviado> list_chat = new ArrayList<>();
+    List<MensajeRecibido> list_chat_R = new ArrayList<>();
     FloatingActionButton btnEnviarMensaje;
+    boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +36,18 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String texto = editText.getText().toString();
-                MensajeEnviado newMessage = new MensajeEnviado(texto,true);
-                list_chat.add(newMessage);
-                ChatAdapter chatAdapter = new ChatAdapter(list_chat,getApplicationContext());
+                if(flag) {
+                    MensajeEnviado newMessage = new MensajeEnviado(texto,true);
+                    list_chat.add(newMessage);
+                }
+                else {
+                    MensajeEnviado newMessage = new MensajeEnviado(texto,false);
+                    list_chat.add(newMessage);
+                }
+                ChatAdapter chatAdapter = new ChatAdapter(list_chat,getBaseContext());
                 listView.setAdapter(chatAdapter);
                 editText.setText("");
+                flag = !flag;
             }
         });
     }

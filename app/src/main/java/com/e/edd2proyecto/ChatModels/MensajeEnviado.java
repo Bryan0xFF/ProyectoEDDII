@@ -2,8 +2,8 @@ package com.e.edd2proyecto.ChatModels;
 
 public class MensajeEnviado {
 
-    public String mensaje;
-    public boolean esEnviado;
+    private String mensaje;
+    private boolean esEnviado;
 
     public MensajeEnviado(String mensaje, boolean esEnviado) {
         this.mensaje = mensaje;
